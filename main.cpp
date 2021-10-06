@@ -10,6 +10,7 @@ const uint32_t HEIGHT = 600;
 
 class TriSoHard {
 private:
+	VkInstance instance;
 	GLFWwindow* window;
 
 public:
@@ -40,7 +41,7 @@ private:
 
 	void initVulkan()
 	{
-
+		createInstance();
 	}
 
 	void mainLoop()
@@ -55,6 +56,22 @@ private:
 		glfwDestroyWindow(window);
 		glfwTerminate();
 	}
+
+	void createInstance()
+	{
+		VkApplicationInfo appInfo{};
+		appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
+		appInfo.pApplicationName = "TriSoHard";
+		appInfo.applicationVersion = VK_MAKE_VERSION(0, 0, 1);
+		appInfo.pEngineName = "No Engine";
+		appInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
+		appInfo.apiVersion = VK_API_VERSION_1_0;
+
+		VkInstanceCreateInfo createInfo{};
+		createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
+		createInfo.pApplicationInfo = &appInfo;
+	}
+
 };
 
 int main()
